@@ -1,21 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
-import Root, { loader as rootLoader } from './pages/Root'
+// import App from './App'
+import Root from './pages/Root'
 import ErrorPage from './pages/error-page'
-import CreateProject from './pages/create-project'
 import './index.css'
 import { createBrowserRouter, RouterProvider} from 'react-router-dom'
+import CreateProject from './pages/createProject'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
-    loader: rootLoader,
     children: [
       {
-        path: "create-project/:contactId",
+        path: "createProject",
         element: <CreateProject />,
       },
     ]

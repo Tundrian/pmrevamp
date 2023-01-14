@@ -1,17 +1,10 @@
-import { Outlet, Link, useLoaderData, } from "react-router-dom";
-import { getCreateProject } from "../pages/create-project";
-
-export async function loader() {
-  const createProject = await getCreateProject();
-  return { createProject };
-}
+import { Outlet, Link } from "react-router-dom";
 
 export default function Root() {
-  const { createProject } = useLoaderData()
     return (
       <>
         <div id="sidebar">
-          <h1>React Router Contacts</h1>
+          <h1 className="text-red-500">React Router Contacts</h1>
           <div>
             <form id="search-form" role="search">
               <input
@@ -36,28 +29,14 @@ export default function Root() {
             </form>
           </div>
           <nav>
-          {createProject.length ? (
-            <ul>
-              {createProject.map((x) => (
-                <li key={x.id}>
-                  <Link to={`createProjects/${x.id}`}>
-                    {x.first || x.last ? (
-                      <>
-                        {x.first} {x.last}
-                      </>
-                    ) : (
-                      <i>No Name</i>
-                    )}{" "}
-                    {createProject.favorite && <span>★</span>}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>
-              <i>No createProjects</i>
-            </p>
-          )}
+          <ul>
+            <li>
+              <Link to={`createProject`}>Link 1</Link>
+            </li>
+            <li>
+              <Link to={``}>Link 2</Link>
+            </li>
+          </ul>
           </nav>
         </div>
           <Outlet />
