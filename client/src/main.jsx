@@ -1,16 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-// import App from './App'
-import Root from './pages/Root'
+import App from './App'
+// import Root from './pages/Root'
 import ErrorPage from './pages/error-page'
 import './index.css'
 import { createBrowserRouter, RouterProvider} from 'react-router-dom'
 import CreateProject from './pages/createProject'
 
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <CreateProject />,
     errorElement: <ErrorPage />,
     children: [
       {
