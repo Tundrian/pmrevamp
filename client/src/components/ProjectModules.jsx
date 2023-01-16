@@ -1,9 +1,6 @@
-import {useState} from 'react'
 import { Link } from 'react-router-dom'
-import ProjectModules from '../components/ProjectModules'
-function createProject() {
-  const [modulesChosen, setModulesChosen] = useState(() => [])
-  const [modules, setModules] = useState(() => ['Company', 'General Ledger', 'Accounts Payable', 'Accounts Receivable'])
+
+function ProjectModules({modules, setModules, modulesChosen, setModulesChosen}) {
 
   return (
     <div className="m-5 grid  place-items-center">
@@ -49,4 +46,4 @@ function createProject() {
   )
 }
 
-export default createProject
+export default ProjectModules

@@ -5,7 +5,7 @@ export default function Root() {
     return (
       <>
         <div id="sidebar" className="w-full py-2 mb-10 flex flex-row justify-between px-10 bg-gray-300 shadow-xl">
-          <h1 className="text-3xl align-middle text-sky-600">React Router Contacts</h1>
+          <h1 className="text-3xl align-middle text-sky-600">PM Revamp</h1>
           <div>
             <form id="search-form" role="search" className="flex justify-center">            
               <input
@@ -14,7 +14,7 @@ export default function Root() {
                 placeholder="Search"
                 type="search"
                 name="q"
-                className="bg-gray-500 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                className="bg-gray-500 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-slate-500"
               />
               <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Search</button>
             </form>
