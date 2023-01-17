@@ -6,7 +6,7 @@ import ErrorPage from './pages/error-page'
 import './index.css'
 import { createBrowserRouter, RouterProvider} from 'react-router-dom'
 import CreateProject from './pages/createProject'
-
+import { ConfigureModules } from './pages/ConfigureModules'
 
 const router = createBrowserRouter([
   {
@@ -17,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "createProject",
         element: <CreateProject />,
+      },
+      {
+        path: "configureModules",
+        element: <ConfigureModules />,
       },
     ]
   },
