@@ -66,9 +66,9 @@ function createProject() {
           </div>
           {step}
           <div className="mt-[1rem] flex gap-[0.5rem] justify-end">
-            {isFirstStep !== 0 && <button type="button" onClick={back} className="border border-gray-400 rounded-lg px-3 py-1 shadow-md hover:bg-blue-600 hover:text-white mx-2">Back</button>}
-            <button type="submit" className="border border-gray-400 rounded-lg px-3 py-1 shadow-md hover:bg-blue-600 hover:text-white mx-2">
-              {isLastStep ? "Finish" : "Next"}
+            {/* {isFirstStep !== 0 && <button type="button" onClick={back} className="border border-gray-400 rounded-lg px-3 py-1 shadow-md hover:bg-blue-600 hover:text-white mx-2">Back</button>} */}
+            <button type="submit" className="bg-blue-500 text-white border border-gray-400 rounded-lg px-3 py-1 shadow-md hover:bg-green-500 mx-2">
+              {isLastStep ? "Submit" : "Next"}
             </button>
           </div>
         </form>
