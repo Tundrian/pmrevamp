@@ -17,17 +17,25 @@ export function ConfigureModules() {
                 <div className="border border-gray-300 text-center rounded w-full">
                     <h1 className="pt-3 text-4xl">Configure Module</h1>
                     <form className="bg-white shadow-md rounded px-8 pt-6 pb-8">
-                        <div className="mb-4 flex">
+                        <div className="mb-4 flex justify-between flex-col items-start">
 
-                            <label htmlFor="">Select Module</label>
-                            <select name="" id="">
+                            <label htmlFor="" className="mb-2">Select Module</label>
+                            <select name="" id="" className="mb-5 bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                                 <option value="">Company</option>
                                 <option value="">General Ledger</option>
                                 <option value="">Accounts Receivable</option>
                             </select>
+                            <label htmlFor="" className="mb-2">Choose checklist type</label>
+                            <select name="" id="" className="hover:cursor-pointer mb-5 bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <option className="hover:cursor-pointer" value="configuration">Configuration</option>
+                                <option className="hover:cursor-pointer " value="setupImpoty">Setup Import</option>
+                                <option className="hover:cursor-pointer " value="question">Question</option>
+                                <option className="hover:cursor-pointer " value="testing">Testing</option>
+                            </select>
+
                         </div>
                         <section>
-                            <Accordian title="Config" content="test content"/>
+                            <Accordian title="Config" content={(<Config />)}/>
                             <Accordian title="Setup Imports" content="test content"/>
                             <Accordian title="Questions" content="test content"/>
                             <Accordian title="Testing" content="test content"/>
