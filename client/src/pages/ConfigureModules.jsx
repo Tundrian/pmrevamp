@@ -2,6 +2,10 @@ import { useState } from 'react'
 import { Accordian } from '../components/createProject/Accordian'
 import { useMultiStepForm } from '../hooks/useMultiStepForm'
 import { Config } from '../components/configureModule/Config'
+import { Imports } from '../components/configureModule/Imports'
+import { Questions } from '../components/configureModule/Questions'
+import { Testing } from '../components/configureModule/Testing'
+
 
 export function ConfigureModules() {
 
@@ -36,9 +40,9 @@ export function ConfigureModules() {
                         </div>
                         <section>
                             <Accordian title="Config" content={(<Config />)}/>
-                            <Accordian title="Setup Imports" content="test content"/>
-                            <Accordian title="Questions" content="test content"/>
-                            <Accordian title="Testing" content="test content"/>
+                            <Accordian title="Setup Imports" content={(<Imports />)}/>
+                            <Accordian title="Questions" content={(<Questions />)}/>
+                            <Accordian title="Testing" content={(<Testing />)}/>
                         </section>
                         <div className="mt-[1rem] flex gap-[0.5rem] justify-end">
                             {/* {isFirstStep !== 0 && <button type="button" onClick={back} className="border border-gray-400 rounded-lg px-3 py-1 shadow-md hover:bg-blue-600 hover:text-white mx-2">Back</button>} */}
