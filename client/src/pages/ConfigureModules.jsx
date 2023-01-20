@@ -6,6 +6,34 @@ import { Imports } from '../components/configureModule/Imports'
 import { Questions } from '../components/configureModule/Questions'
 import { Testing } from '../components/configureModule/Testing'
 
+const DUMMY_DATA = [
+    {
+        id: "1",
+        numeber: 1,
+        module: "Company",
+        type: "Configuration",
+        name: "Add admin user",
+        topic: "Initial Configuration",
+        instructions: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, facere impedit! Dolorem omnis quas eius! Voluptate suscipit praesentium dolor mollitia.",
+        screenshots: [
+            "http://placekitten.com/200/300",
+            "https://placekitten.com/300/300"
+        ]
+    },
+    {
+        id: "2",
+        numeber: 2,
+        module: "Company",
+        type: "Configuration",
+        name: "Login",
+        topic: "Initial Configuration",
+        instructions: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, nostrum.",
+        screenshots: [
+            "http://placekitten.com/200/400",
+            "https://placekitten.com/200/200"
+        ]
+    }
+]
 
 export function ConfigureModules() {
 
