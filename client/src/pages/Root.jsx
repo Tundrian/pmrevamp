@@ -5,7 +5,7 @@ export default function Root() {
     return (
       <>
         <div id="sidebar" className="w-full py-5 mb-10 flex flex-row justify-between px-10 bg-slate-700 shadow-xl">
-          <h1 className="text-2xl text-white font-thin lg:text-5xl">PM Revamp</h1>
+          <Link to={'/'}><h1 className="text-2xl text-white font-thin lg:text-5xl">PM Revamp</h1></Link>
           <div>
             <form id="search-form" role="search" className="flex justify-center">            
               <input
