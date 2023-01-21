@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 
 export function Accordian({ title, content }) {
     const [isOpen, setIsOpen] = useState(() => true)
-    const [height, setHeight] = useState("h-0")
+    const [height, setHeight] = useState("")
     const contentElement = useRef(null)
 
     function handleOpenState() {
@@ -13,7 +13,7 @@ export function Accordian({ title, content }) {
     
 
     return (
-        <div onClick={handleOpenState} className="border border-slate-600 rounded-t-sm my-5">
+        <div  className="border border-slate-600 rounded-t-sm my-5">
             <div className={"bg-slate-600 p-4 flex justify-between text-white"}>
                 <h4 className="font-semibold">{title}</h4>
                 {isOpen ? '+' : '-'}
