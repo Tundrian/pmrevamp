@@ -1,6 +1,6 @@
 
 
-export function StepList({data}){
+export function StepList({steps, topics}){
 
     /* 
         display list of steps

@@ -160,7 +160,7 @@ export function ConfigureModules() {
                     
                     
                 </div>
-                <StepList data={STEPS}/>
+                <StepList steps={STEPS} topics={TOPICS}/>
             </div>
         </>
     )
