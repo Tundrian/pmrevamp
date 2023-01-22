@@ -24,22 +24,6 @@ const MODULES = [
     },
 ]
 
-//ENUM
-const TYPES = [
-    {
-        id: "1",
-        name: "configuration",
-    },
-    {
-        id: "2",
-        name: "import",
-    },
-    {
-        id: "3",
-        name: "training",
-    },
-]
-
 //From DB
 const TOPICS = [
     {
@@ -116,12 +100,12 @@ export function ConfigureModules() {
                             </select>
 
                         </div>
-                        {/*<section>
+                        <section>
                             <Accordian title="Config" content={(<Config />)}/>
                             <Accordian title="Setup Imports" content={(<Imports />)}/>
                             <Accordian title="Questions" content={(<Questions />)}/>
                             <Accordian title="Testing" content={(<Testing />)}/>
-    </section> */}
+    </section>
                         <div className="mt-[1rem] flex gap-[0.5rem] justify-end">
                             {/* {isFirstStep !== 0 && <button type="button" onClick={back} className="border border-gray-400 rounded-lg px-3 py-1 shadow-md hover:bg-blue-600 hover:text-white mx-2">Back</button>} */}
                             <button type="submit" className="bg-blue-500 text-white border border-gray-400 rounded-lg px-3 py-1 shadow-md hover:bg-green-500 mx-2">
@@ -130,37 +114,8 @@ export function ConfigureModules() {
                         </div>
                     </form>
                 </div>
-                <div>
-                    <h1 className="text-4xl">Types</h1>
-                    <ul>
-                        <li>
-                            <h2 className="text-2xl indend-5">Configuration</h2>
-                            <h3 className="text-xl indent-10">Topics</h3>
-                            <ul className="indent-16">
-                                <li>
-                                    <h4><span>1. </span>Initial Configuration</h4>
-                                    <ul className="indent-24">
-                                        <li><span>1. </span>Create Admin User</li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <h4><span>2. </span>Default Setups</h4>
-                                </li>
-                            </ul>    
-                        </li>
-                        <li>
-                            <h2 className="text-2xl indend-5">Import</h2>
-                            <h3 className="text-xl indent-10">Topics</h3>
-                            <ul className="indent-16">
-                                <li><span>1. </span>Users</li>
-                                <li><span>2. </span>Chart of Accounts </li>
-                            </ul>    
-                        </li>
-                    </ul>
-                    
-                    
-                </div>
-                <StepList steps={STEPS} topics={TOPICS}/>
+                
+                <StepList steps={STEPS} topics={TOPICS} />
             </div>
         </>
     )

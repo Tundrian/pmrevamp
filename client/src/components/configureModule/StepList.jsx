@@ -1,6 +1,6 @@
 
 
-export function StepList({steps, topics}){
+export function StepList({ steps, topics }) {
 
     /* 
         display list of steps
@@ -18,11 +18,61 @@ export function StepList({steps, topics}){
     */
 
     // let categories = new Set([...data.type])
-    console.log('data: ', data.map(x => x.topic) )
+    const TYPES = [
+        {
+            id: "1",
+            name: "configuration",
+        },
+        {
+            id: "2",
+            name: "import",
+        },
+        {
+            id: "3",
+            name: "training",
+        },
+    ] 
+    console.log('steps: ', steps)
+    console.log('topics: ', topics)
 
     return (
         <>
-        
+            <div>
+                <h1 className="text-4xl">Types</h1>
+                <ul>
+                    {TYPES.length && TYPES.map(type =>
+                        <li key={type.id}>
+                            <h2 className="text-2xl indend-5">{type.name}</h2>
+
+                            <h3 className="text-xl indent-10">Topics</h3>
+                            <ul className="indent-16">
+                                {topics.length && topics.filter(topic => topic.typeName === type.name).map(topic =>
+                                    <li key={topic.id}>
+                                        <h4><span>{topic.topicOrder}. </span>{topic.name}</h4>
+                                        <ul className="indent-24">
+                                            {steps.length && steps.filter(step => step.topicID === topic.id).map(step =>
+                                                <li key={step.id}><span>{step.orderNumber}. </span>{step.name}</li>
+                                            )}
+                                        </ul>
+                                    </li>
+                                )}
+                            </ul>
+
+                        </li>
+                    )}
+                    <li>
+                        <h2 className="text-2xl indend-5">Import</h2>
+                        <h3 className="text-xl indent-10">Topics</h3>
+                        <ul className="indent-16">
+                            <li><span>1. </span>Users</li>
+                            <li><span>2. </span>Chart of Accounts </li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+
+            </div>
         </>
     )
 }
