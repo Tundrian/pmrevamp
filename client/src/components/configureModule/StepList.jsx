@@ -1,4 +1,6 @@
-
+import Card from 'react-bootstrap/Card'
+import ListGroup from 'react-bootstrap/ListGroup'
+import Table from 'react-bootstrap/Table'
 
 export function StepList({ steps, topics }) {
 
@@ -31,47 +33,51 @@ export function StepList({ steps, topics }) {
             id: "3",
             name: "training",
         },
-    ] 
-    console.log('steps: ', steps)
-    console.log('topics: ', topics)
+    ]
 
     return (
         <>
-            <div>
-                <h1 className="text-4xl">Types</h1>
-                <ul>
-                    {TYPES.length && TYPES.map(type =>
-                        <li key={type.id}>
-                            <h2 className="text-2xl indend-5">{type.name}</h2>
+            <div className="w-full">
+                <Card className="mt-3 p-3 shadow-lg" >
 
-                            <h3 className="text-xl indent-10">Topics</h3>
-                            <ul className="indent-16">
-                                {topics.length && topics.filter(topic => topic.typeName === type.name).map(topic =>
-                                    <li key={topic.id}>
-                                        <h4><span>{topic.topicOrder}. </span>{topic.name}</h4>
-                                        <ul className="indent-24">
-                                            {steps.length && steps.filter(step => step.topicID === topic.id).map(step =>
-                                                <li key={step.id}><span>{step.orderNumber}. </span>{step.name}</li>
-                                            )}
-                                        </ul>
-                                    </li>
-                                )}
-                            </ul>
+                    <h1 className="text-4xl mb-3 text-center">Steps</h1>
+                    <ul>
+                        {TYPES.length && TYPES.map(type =>
+                            <li key={type.id} className="border mb-4 p-2 shadow-sm rounded-lg">
+                                <h2 className="text-2xl indend-5 text-blue-700 text-center border-b border-b-slate-300 pb-2 mb-3">
+                                    <span className="uppercase">{type.name[0]}</span>
+                                    {type.name.slice(1)}
+                                </h2>
 
-                        </li>
-                    )}
-                    <li>
-                        <h2 className="text-2xl indend-5">Import</h2>
-                        <h3 className="text-xl indent-10">Topics</h3>
-                        <ul className="indent-16">
-                            <li><span>1. </span>Users</li>
-                            <li><span>2. </span>Chart of Accounts </li>
-                        </ul>
-                    </li>
+                                {/* <h3 className="text-xl indent-10">Topics</h3> */}
+                                <ul className="w-11/12">
+                                    {topics.length && topics.filter(topic => topic.typeName === type.name).sort((a, b) => a.topicOrder - b.topicOrder).map(topic =>
+                                        <li key={topic.id} className="mb-4">
+                                            <h4 className="text-slate-500 text-2xl"><span>{topic.topicOrder}. </span>{topic.name}</h4>
+                                            <Table striped className="indent-10">
+                                                <thead>
+                                                    <tr className="text-gray-400">
+                                                        <th>#</th>
+                                                        <th>Name</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {steps.length && steps.filter(step => step.topicID === topic.id).sort((a, b) => a.orderNumber - b.orderNumber).map(step =>
+                                                        <tr>
+                                                            <td>{step.orderNumber}.</td>
+                                                            <td>{step.name}</td>
+                                                        </tr>
+                                                    )}
+                                                </tbody>
+                                            </Table>
+                                        </li>
+                                    )}
+                                </ul>
 
-                </ul>
-
-
+                            </li>
+                        )}
+                    </ul>
+                </Card>
             </div>
         </>
     )

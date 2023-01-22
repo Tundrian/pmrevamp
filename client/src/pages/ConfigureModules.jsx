@@ -79,7 +79,7 @@ export function ConfigureModules() {
     */
     return (
         <>
-            <div className="grid place-items-center">
+            <div className="grid place-items-center m-3">
                 <div className="border border-gray-300 text-center rounded w-full">
                     <h1 className="pt-3 text-4xl">Configure Module</h1>
                     <form className="bg-white shadow-md rounded px-8 pt-6 pb-8">
@@ -101,11 +101,11 @@ export function ConfigureModules() {
 
                         </div>
                         <section>
-                            <Accordian title="Config" content={(<Config />)}/>
+                            {/* <Accordian title="Config" content={(<Config />)}/>
                             <Accordian title="Setup Imports" content={(<Imports />)}/>
                             <Accordian title="Questions" content={(<Questions />)}/>
-                            <Accordian title="Testing" content={(<Testing />)}/>
-    </section>
+                            <Accordian title="Testing" content={(<Testing />)}/> */}
+                        </section>
                         <div className="mt-[1rem] flex gap-[0.5rem] justify-end">
                             {/* {isFirstStep !== 0 && <button type="button" onClick={back} className="border border-gray-400 rounded-lg px-3 py-1 shadow-md hover:bg-blue-600 hover:text-white mx-2">Back</button>} */}
                             <button type="submit" className="bg-blue-500 text-white border border-gray-400 rounded-lg px-3 py-1 shadow-md hover:bg-green-500 mx-2">
@@ -114,7 +114,7 @@ export function ConfigureModules() {
                         </div>
                     </form>
                 </div>
-                
+
                 <StepList steps={STEPS} topics={TOPICS} />
             </div>
         </>

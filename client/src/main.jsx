@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider} from 'react-router-dom'
 import CreateProject from './pages/createProject'
 import { ConfigureModules } from './pages/ConfigureModules'
 import {QueryClientProvider, QueryClient} from '@tanstack/react-query'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Create a client
 const queryClient = new QueryClient()
