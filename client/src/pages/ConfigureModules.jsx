@@ -72,10 +72,10 @@ const STEPS = [
 export function ConfigureModules() {
 
     /*
-         Make select or add input field
-        On module chosen, show accordians for each section
-        add fields for each accordian section
-        Have state created for each accordian as well
+        Have state created for each accordian module
+        connect form with state to have it update
+        The list should then pull from the newly added values
+
     */
     return (
         <>
@@ -101,8 +101,8 @@ export function ConfigureModules() {
 
                         </div>
                         <section>
-                            {/* <Accordian title="Config" content={(<Config />)}/>
-                            <Accordian title="Setup Imports" content={(<Imports />)}/>
+                            <Accordian title="Config" content={(<Config />)}/>
+                            {/* <Accordian title="Setup Imports" content={(<Imports />)}/>
                             <Accordian title="Questions" content={(<Questions />)}/>
                             <Accordian title="Testing" content={(<Testing />)}/> */}
                         </section>

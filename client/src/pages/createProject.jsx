@@ -57,9 +57,9 @@ function createProject() {
 
   return (
 
-    <div className="grid place-items-center">
+    <div className="grid place-items-center m-3">
       <div className="border border-gray-300 text-center rounded">
-        <h1 className="pt-3 text-4xl">Create Project</h1>
+        <h1 className="pt-3 text-4xl clas">Create Project</h1>
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8">
           <div className="mb-4 flex">
             {currentStepIndex + 1} / {steps.length}

@@ -24,9 +24,9 @@ export function ModuleSelection({customer, modules, modulesChosen, updateFields}
         </div>
         {modulesChosen.length ? (
             <section className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3">
-                <ul className="">
+                <ul className="w-full flex flex-col items-start pt-3">
                     {modulesChosen.length ? modulesChosen.map((module, i) =>
-                        <li key={i}>{module}</li>
+                        <li key={i} className="mb-2 border-b w-full">{i+1}. {module}</li>
                     ) : ''}
                 </ul>
             </section>
