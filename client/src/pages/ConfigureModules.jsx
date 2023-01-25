@@ -85,6 +85,12 @@ export function ConfigureModules() {
     const [selectedType, setSelectedType] = useState('')
     let Component = accordians[selectedType]
 
+    function updateType(type){
+        console.log(type)
+        Component = accordians[type]
+        console.log(Component)
+        setSelectedType(type)
+    }
     return (
         <>
             <div className="grid place-items-center m-3">
@@ -103,26 +109,17 @@ export function ConfigureModules() {
                             <label htmlFor="" className="mb-2">Choose checklist type</label>
                             <select name="" id="" className="hover:cursor-pointer mb-5 bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                                 {TYPES.length && TYPES.map(type => (
-                                    <option onClick={() => setSelectedType(type)} key={type} className="hover:cursor-pointer" value={type}>{type}</option>
+                                    <option onClick={(e) => updateType(e.target.value)} key={type} className="hover:cursor-pointer" value={type}>{type}</option>
                                 ))}
                             </select>
 
                         </div>
-                        <section>
-                            {selectedType && (
-                                
-                                <Accordian title={Component.title} content={Component.component}/>
-                            )}
-                            {/* <Accordian title="Setup Imports" content={(<Imports />)}/>
-                            <Accordian title="Questions" content={(<Questions />)}/>
-                            <Accordian title="Testing" content={(<Testing />)}/> */}
-                        </section>
-                        <div className="mt-[1rem] flex gap-[0.5rem] justify-end">
-                            <button type="submit" className="bg-blue-500 text-white border border-gray-400 rounded-lg px-3 py-1 shadow-md hover:bg-green-500 mx-2">
-                                Submit
-                            </button>
-                        </div>
                     </form>
+                    <section>
+                    {selectedType && (
+                        <Accordian title={Component.title} content={<Component.component />}/>
+                    )}
+                    </section>
                 </div>
 
                 <StepList steps={STEPS} topics={TOPICS} />

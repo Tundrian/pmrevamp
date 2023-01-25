@@ -22,7 +22,7 @@ export function Accordian({ title, content }) {
                 ref={contentElement}
                 className={`bg-white overflow-hidden transition-all duration-200 ${height}`}
             >
-                <p className="p-4">{content}</p>
+                <div className="p-4">{content}</div>
             </div>
         </div>
     )
