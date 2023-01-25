@@ -1,12 +1,10 @@
 import { useState } from 'react'
 import { Accordian } from '../components/createProject/Accordian'
-import { useMultiStepForm } from '../hooks/useMultiStepForm'
 import { Config } from '../components/configureModule/Config'
 import { Imports } from '../components/configureModule/Imports'
 import { Questions } from '../components/configureModule/Questions'
 import { Testing } from '../components/configureModule/Testing'
 import { StepList } from '../components/configureModule/StepList'
-import { version } from 'react'
 
 //From DB
 const MODULES = [
@@ -69,14 +67,24 @@ const STEPS = [
 
 ]
 
+const TYPES = [
+    "Configuration",
+    "Setup Import",
+    "Question",
+    "Testing",
+]
+
+const accordians = {
+    "Configuration": {component: Config, title: "Config"},
+    "Setup Import": {component: Imports, title: "Setup Imports"},
+    "Question": Questions,
+    "Testing": Testing,
+}
 export function ConfigureModules() {
 
-    /*
-        Have state created for each accordian module
-        connect form with state to have it update
-        The list should then pull from the newly added values
+    const [selectedType, setSelectedType] = useState('')
+    let Component = accordians[selectedType]
 
-    */
     return (
         <>
             <div className="grid place-items-center m-3">
@@ -87,27 +95,29 @@ export function ConfigureModules() {
 
                             <label htmlFor="" className="mb-2">Select Module</label>
                             <select name="" id="" className="mb-5 bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                                <option value="">Company</option>
-                                <option value="">General Ledger</option>
-                                <option value="">Accounts Receivable</option>
+                                {MODULES.length && MODULES.map(module => (
+                                    <option key={module.id} value={module.name}>{module.name}</option>
+                                ))}
                             </select>
+
                             <label htmlFor="" className="mb-2">Choose checklist type</label>
                             <select name="" id="" className="hover:cursor-pointer mb-5 bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                                <option className="hover:cursor-pointer" value="configuration">Configuration</option>
-                                <option className="hover:cursor-pointer " value="setupImpoty">Setup Import</option>
-                                <option className="hover:cursor-pointer " value="question">Question</option>
-                                <option className="hover:cursor-pointer " value="testing">Testing</option>
+                                {TYPES.length && TYPES.map(type => (
+                                    <option onClick={() => setSelectedType(type)} key={type} className="hover:cursor-pointer" value={type}>{type}</option>
+                                ))}
                             </select>
 
                         </div>
                         <section>
-                            <Accordian title="Config" content={(<Config />)}/>
+                            {selectedType && (
+                                
+                                <Accordian title={Component.title} content={Component.component}/>
+                            )}
                             {/* <Accordian title="Setup Imports" content={(<Imports />)}/>
                             <Accordian title="Questions" content={(<Questions />)}/>
                             <Accordian title="Testing" content={(<Testing />)}/> */}
                         </section>
                         <div className="mt-[1rem] flex gap-[0.5rem] justify-end">
-                            {/* {isFirstStep !== 0 && <button type="button" onClick={back} className="border border-gray-400 rounded-lg px-3 py-1 shadow-md hover:bg-blue-600 hover:text-white mx-2">Back</button>} */}
                             <button type="submit" className="bg-blue-500 text-white border border-gray-400 rounded-lg px-3 py-1 shadow-md hover:bg-green-500 mx-2">
                                 Submit
                             </button>

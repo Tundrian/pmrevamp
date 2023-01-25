@@ -21,20 +21,20 @@ export default function Root() {
               </Button>
             </InputGroup>
             <Nav className="me-auto flex flex-row justify-start">
-              <Nav.Link >
+              
                 <Link to={`createProject`} className="mx-1">
                   <Button variant="primary">
                     Create Project
                   </Button>
                 </Link>
-              </Nav.Link>
-              <Nav.Link >
+              
+              
                 <Link to={`configureModules`} className="mx-1">
                   <Button variant="primary">
                     Configure Modules
                   </Button>
                 </Link>
-              </Nav.Link>
+              
             </Nav>
           </Navbar.Collapse>
         </Container>

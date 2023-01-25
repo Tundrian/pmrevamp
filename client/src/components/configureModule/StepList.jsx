@@ -63,7 +63,7 @@ export function StepList({ steps, topics }) {
                                                 </thead>
                                                 <tbody>
                                                     {steps.length && steps.filter(step => step.topicID === topic.id).sort((a, b) => a.orderNumber - b.orderNumber).map(step =>
-                                                        <tr>
+                                                        <tr key={step.id}>
                                                             <td>{step.orderNumber}.</td>
                                                             <td>{step.name}</td>
                                                         </tr>
