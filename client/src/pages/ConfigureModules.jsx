@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { modules } from '../lists/modules'
 import { implementationTypes } from '../lists/implementationTypes'
 import { Card, Form, Button } from 'react-bootstrap'
@@ -73,9 +73,9 @@ export function ConfigureModules() {
         // step: null,
         // answer: '',
     })
-    const [uniqueTypes, setUniqueTypes] = useState([])
-    const [uniqueCategories, setUniqueCategories] = useState([])
-    const [stepsList, setStepsList] = useState([])
+    const uniqueTypes = useRef([])
+    const uniqueCategories = useRef([])
+    const stepsList = useRef([])
 
     let options = [
         'Company Configuration',
@@ -83,35 +83,23 @@ export function ConfigureModules() {
         'External Authorization',
     ]
 
-    // let stepsList = testData.filter(step => step.module === fields.module)
-    let types = new Set([...stepsList])
+    let types = new Set([...stepsList.current])
 
     function submitForm() {
         console.log(fields)
     }
 
-    // async function moduleChange(e){
-    //     setFields({...fields, module: e.target.value})
-    //     setStepsList(testData.filter(step => step.module === fields.module))
-    //     setUniqueTypes(Array.from(new Set(stepsList. map(step => step.type))))
-    //     setUniqueCategories(Array.from(new Set(stepsList.map(step => step.category))))
-    //     console.log(fields, stepsList, uniqueTypes, uniqueCategories)
-    // }
-
     useEffect(() => {
-        // setFields({...fields, module: e.target.value})
-        setStepsList(testData.filter(step => step.module === fields.module))
-        setUniqueTypes(Array.from(new Set(stepsList.map(step => step.type))))
-        setUniqueCategories(Array.from(new Set(stepsList.map(step => step.category))))
-        console.log('fields: ', fields, ' | stepsList: ', stepsList, ' | uniqueTypes: ', uniqueTypes, ' | uniqueCategories: ', uniqueCategories)
+        stepsList.current = testData.filter(step => step.module === fields.module)
+        
     }, [fields.module])
 
     useEffect(() => {
-        setStepsList([])
-    }, [])
-    /*
-        then while iterating through unique categories / types, filter a list of steps to match and iterate through
-    */
+        uniqueTypes.current = Array.from(new Set(stepsList.current.map(step => step.type)))
+        uniqueCategories.current = Array.from(new Set(stepsList.current.map(step => step.category)))
+
+    }, [stepsList.current])
+
     return (
         <>
             <Card className="m-3">
@@ -166,19 +154,21 @@ export function ConfigureModules() {
             <Card className="m-3">
                 <Card.Header>Existing Steps</Card.Header>
                 <Card.Body>
-                    {uniqueTypes.length !== 0 && uniqueTypes.map(type => (
+                    {uniqueTypes.current.length !== 0 && uniqueTypes.current.map(type => (
                         <Card key={type} className="m-3">
                             <Card.Header>{type}</Card.Header>
                             <Card.Body>
-                                {uniqueCategories.length !== 0 && uniqueCategories.map(category => (
+                                {uniqueCategories.current.length !== 0 && uniqueCategories.current.map(category => (
                                     <Card key={category} className="m-3">
                                         <Card.Header>{category}</Card.Header>
                                         <Card.Body>
-                                            {stepsList.filter(step => step.category === category && step.type === type).map(step => {
-                                                (
+                                            <ul>
+                                            {stepsList.current.filter(step => step.category === category && step.type === type).map(step => {
+                                                return (
                                                     <li key={step.id}>{step.name}</li>
                                                 )
                                             })}
+                                            </ul>
                                         </Card.Body>
                                     </Card>
                                 ))}
