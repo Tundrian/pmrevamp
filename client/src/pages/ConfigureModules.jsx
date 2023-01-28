@@ -1,129 +1,192 @@
-import { useState } from 'react'
-import { Accordian } from '../components/createProject/Accordian'
-import { Config } from '../components/configureModule/Config'
-import { Imports } from '../components/configureModule/Imports'
-import { Questions } from '../components/configureModule/Questions'
-import { Testing } from '../components/configureModule/Testing'
-import { StepList } from '../components/configureModule/StepList'
+import { useState, useEffect } from 'react'
+import { modules } from '../lists/modules'
+import { implementationTypes } from '../lists/implementationTypes'
+import { Card, Form, Button } from 'react-bootstrap'
+import { Typeahead } from 'react-bootstrap-typeahead'
 
-//From DB
-const MODULES = [
+let testData = [
     {
-        id: "1",
-        name: "company",
+        id: '1',
+        name: 'Grant Access',
+        description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, nemo!',
+        module: 'Company',
+        type: 'Configuration',
+        category: 'External Authorization',
+        notes: '',
+        answer: '',
+        link: '',
+        status: '',
+        attachment: '',
     },
     {
-        id: "2",
-        name: "general ledger",
+        id: '2',
+        name: 'Set up Admin Role',
+        description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, nemo!',
+        module: 'Company',
+        type: 'Configuration',
+        category: 'External Authorization',
+        notes: '',
+        answer: '',
+        link: '',
+        status: '',
+        attachment: '',
     },
     {
-        id: "3",
-        name: "accounts receivable",
+        id: '3',
+        name: 'Import COA',
+        description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, nemo!',
+        module: 'General Ledger',
+        type: 'Import',
+        category: 'Setup Import',
+        notes: '',
+        answer: '',
+        link: '',
+        status: '',
+        attachment: '',
+    },
+    {
+        id: '4',
+        name: 'Setup entities',
+        description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, nemo!',
+        module: 'Company',
+        type: 'Configuration',
+        category: 'Entities',
+        notes: '',
+        answer: '',
+        link: '',
+        status: '',
+        attachment: '',
     },
 ]
 
-//From DB
-const TOPICS = [
-    {
-        id: "1",
-        name: "Initial Configuration",
-        topicOrder: 1,
-        typeName: "configuration", //Configuration
-        moduleID: "1" //Company
-    },
-    {
-        id: "2",
-        name: "Default Setup",
-        topicOrder: 2,
-        typeName: "configuration", //Configuration
-        moduleID: "1" //Company
-    }
-]
-
-//From DB
-const STEPS = [
-    {
-        id: "1",
-        orderNumber: 2,
-        name: "Register",
-        topicID: "1", //Initial Configuration, Configuration, Company
-        instructions: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, facere impedit! Dolorem omnis quas eius! Voluptate suscipit praesentium dolor mollitia.",
-        screenshots: [
-            "http://placekitten.com/200/300",
-            "https://placekitten.com/300/300"
-        ]
-    },
-    {
-        id: "2",
-        orderNumber: 1,
-        name: "Login",
-        topicID: "1", //Initial Configuration, Configuration, Company
-        instructions: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, quis.",
-        screenshots: [
-            "http://placekitten.com/300/200",
-            "https://placekitten.com/400/400"
-        ]
-    },
-
-]
-
-const TYPES = [
-    "Configuration",
-    "Setup Import",
-    "Question",
-    "Testing",
-]
-
-const accordians = {
-    "Configuration": {component: Config, title: "Config"},
-    "Setup Import": {component: Imports, title: "Setup Imports"},
-    "Question": Questions,
-    "Testing": Testing,
-}
 export function ConfigureModules() {
+    const [fields, setFields] = useState({
+        module: '',
+        type: '',
+        category: '',
+        name: '',
+        description: '',
+        // notes: '',
+        // status: '',
+        // instructionsLink: '',
+        // attachments: '',
+        // step: null,
+        // answer: '',
+    })
+    const [uniqueTypes, setUniqueTypes] = useState([])
+    const [uniqueCategories, setUniqueCategories] = useState([])
+    const [stepsList, setStepsList] = useState([])
 
-    const [selectedType, setSelectedType] = useState('')
-    let Component = accordians[selectedType]
+    let options = [
+        'Company Configuration',
+        'Admin',
+        'External Authorization',
+    ]
 
-    function updateType(type){
-        console.log(type)
-        Component = accordians[type]
-        console.log(Component)
-        setSelectedType(type)
+    // let stepsList = testData.filter(step => step.module === fields.module)
+    let types = new Set([...stepsList])
+
+    function submitForm() {
+        console.log(fields)
     }
+
+    // async function moduleChange(e){
+    //     setFields({...fields, module: e.target.value})
+    //     setStepsList(testData.filter(step => step.module === fields.module))
+    //     setUniqueTypes(Array.from(new Set(stepsList. map(step => step.type))))
+    //     setUniqueCategories(Array.from(new Set(stepsList.map(step => step.category))))
+    //     console.log(fields, stepsList, uniqueTypes, uniqueCategories)
+    // }
+
+    useEffect(() => {
+        // setFields({...fields, module: e.target.value})
+        setStepsList(testData.filter(step => step.module === fields.module))
+        setUniqueTypes(Array.from(new Set(stepsList.map(step => step.type))))
+        setUniqueCategories(Array.from(new Set(stepsList.map(step => step.category))))
+        console.log('fields: ', fields, ' | stepsList: ', stepsList, ' | uniqueTypes: ', uniqueTypes, ' | uniqueCategories: ', uniqueCategories)
+    }, [fields.module])
+
+    useEffect(() => {
+        setStepsList([])
+    }, [])
+    /*
+        then while iterating through unique categories / types, filter a list of steps to match and iterate through
+    */
     return (
         <>
-            <div className="grid place-items-center m-3">
-                <div className="border border-gray-300 text-center rounded w-full">
-                    <h1 className="pt-3 text-4xl">Configure Module</h1>
-                    <form className="bg-white shadow-md rounded px-8 pt-6 pb-8">
-                        <div className="mb-4 flex justify-between flex-col items-start">
+            <Card className="m-3">
+                <Card.Body>
+                    <Form>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Module</Form.Label>
+                            <Form.Select
+                                value={fields.module}
+                                onChange={(e) => setFields({ ...fields, module: e.target.value })}
+                            // onChange={moduleChange}
+                            >
+                                {modules.map(module => (<option key={module}>{module}</option>))}
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Implenetation Type</Form.Label>
+                            <Form.Select value={fields.type} onChange={(e) => setFields({ ...fields, type: e.target.value })}>
+                                {implementationTypes.map(implementationType => (<option key={implementationType}>{implementationType}</option>))}
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Category</Form.Label>
+                            <Typeahead
+                                id="select-category"
+                                onChange={(selected) => {
+                                    setFields({ ...fields, category: selected[0] })
+                                }}
+                                options={options}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                placeholder="Instruction name"
+                                aria-label="Instruction name"
+                                onChange={(e) => setFields({ ...fields, name: e.target.value })}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control as="textarea" rows={3} onChange={(e) => setFields({ ...fields, dsecription: e.target.value })} />
+                        </Form.Group>
+                    </Form>
+                </Card.Body>
 
-                            <label htmlFor="" className="mb-2">Select Module</label>
-                            <select name="" id="" className="mb-5 bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                                {MODULES.length && MODULES.map(module => (
-                                    <option key={module.id} value={module.name}>{module.name}</option>
+                <Card.Footer>
+                    <Button onClick={() => submitForm()}>Submit</Button>
+                </Card.Footer>
+            </Card>
+
+            <Card className="m-3">
+                <Card.Header>Existing Steps</Card.Header>
+                <Card.Body>
+                    {uniqueTypes.length !== 0 && uniqueTypes.map(type => (
+                        <Card key={type} className="m-3">
+                            <Card.Header>{type}</Card.Header>
+                            <Card.Body>
+                                {uniqueCategories.length !== 0 && uniqueCategories.map(category => (
+                                    <Card key={category} className="m-3">
+                                        <Card.Header>{category}</Card.Header>
+                                        <Card.Body>
+                                            {stepsList.filter(step => step.category === category && step.type === type).map(step => {
+                                                (
+                                                    <li key={step.id}>{step.name}</li>
+                                                )
+                                            })}
+                                        </Card.Body>
+                                    </Card>
                                 ))}
-                            </select>
-
-                            <label htmlFor="" className="mb-2">Choose checklist type</label>
-                            <select name="" id="" className="hover:cursor-pointer mb-5 bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                                {TYPES.length && TYPES.map(type => (
-                                    <option onClick={(e) => updateType(e.target.value)} key={type} className="hover:cursor-pointer" value={type}>{type}</option>
-                                ))}
-                            </select>
-
-                        </div>
-                    </form>
-                    <section>
-                    {selectedType && (
-                        <Accordian title={Component.title} content={<Component.component />}/>
-                    )}
-                    </section>
-                </div>
-
-                <StepList steps={STEPS} topics={TOPICS} />
-            </div>
+                            </Card.Body>
+                        </Card>
+                    ))}
+                </Card.Body>
+            </Card>
         </>
     )
 }
