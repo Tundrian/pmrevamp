@@ -76,29 +76,34 @@ export function ConfigureModules() {
     const uniqueTypes = useRef([])
     const uniqueCategories = useRef([])
     const stepsList = useRef([])
-
+    
     let options = [
         'Company Configuration',
         'Admin',
         'External Authorization',
     ]
 
-    let types = new Set([...stepsList.current])
-
     function submitForm() {
         console.log(fields)
+        testData.push(fields)
+        options.push(fields.category)
+        updateList(fields.module)
     }
 
     useEffect(() => {
-        stepsList.current = testData.filter(step => step.module === fields.module)
-        
-    }, [fields.module])
+        updateList('Company')
+    }, [])
 
-    useEffect(() => {
+    async function updateList(module){
+        setFields({ ...fields, module: module })
+        stepsList.current = testData.filter(step => step.module === module)
         uniqueTypes.current = Array.from(new Set(stepsList.current.map(step => step.type)))
-        uniqueCategories.current = Array.from(new Set(stepsList.current.map(step => step.category)))
+        uniqueCategories.current = [...stepsList.current.reduce((step, {type, category}) => {
+            return(step.set(`${type}-${category}`, { type, category }))
+        }, new Map()).values()]
 
-    }, [stepsList.current])
+        console.log(uniqueCategories)
+    }
 
     return (
         <>
@@ -109,8 +114,7 @@ export function ConfigureModules() {
                             <Form.Label>Module</Form.Label>
                             <Form.Select
                                 value={fields.module}
-                                onChange={(e) => setFields({ ...fields, module: e.target.value })}
-                            // onChange={moduleChange}
+                                onChange={(e) => updateList(e.target.value)}
                             >
                                 {modules.map(module => (<option key={module}>{module}</option>))}
                             </Form.Select>
@@ -158,12 +162,12 @@ export function ConfigureModules() {
                         <Card key={type} className="m-3">
                             <Card.Header>{type}</Card.Header>
                             <Card.Body>
-                                {uniqueCategories.current.length !== 0 && uniqueCategories.current.map(category => (
-                                    <Card key={category} className="m-3">
-                                        <Card.Header>{category}</Card.Header>
+                                {uniqueCategories.current.length !== 0 && uniqueCategories.current.filter(category => category.type === type).map(category => (
+                                    <Card key={category.category} className="m-3">
+                                        <Card.Header>{category.category}</Card.Header>
                                         <Card.Body>
                                             <ul>
-                                            {stepsList.current.filter(step => step.category === category && step.type === type).map(step => {
+                                            {stepsList.current.filter(step => step.category === category.category && step.type === type).map(step => {
                                                 return (
                                                     <li key={step.id}>{step.name}</li>
                                                 )
