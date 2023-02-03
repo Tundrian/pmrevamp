@@ -1,14 +1,18 @@
 import { Outlet, Link } from "react-router-dom";
 import '../index.css'
+import '../App.css'
 import { InputGroup, Form, Button, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import {useState} from 'react'
 
 export default function Root() {
+  const [darkMode, setDarkMode] = useState(true);
+
   return (
     <>
-      <Navbar bg="light" expand="lg">
+      <Navbar expand="lg" bg="light"  >
         <Container>
           <Navbar.Brand ><Link to="/" className="no-underline">PM Revamp</Link></Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className=""/>
           <Navbar.Collapse id="basic-navbar-nav">
             <InputGroup className="my-3 border border-green-500">
               <Form.Control
@@ -32,6 +36,12 @@ export default function Root() {
                 <Link to={`configureModules`} className="mx-1">
                   <Button variant="primary">
                     Configure Modules
+                  </Button>
+                </Link>
+
+                <Link to={`viewProjects`} className="mx-1">
+                  <Button variant="primary">
+                    View Projects
                   </Button>
                 </Link>
               
