@@ -63,7 +63,6 @@ const updateStep = asyncHandler(async (req, res) => {
         throw new Error('Step not found')
     }
 
-
     const updatedStep = await Step.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
       })

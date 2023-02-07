@@ -9,7 +9,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
-// app.use('/api/step', StepRouter)
+app.use('/api/step', StepRouter)
 
 app.get('/', (req, res) => {
     res.send('Application works!')
