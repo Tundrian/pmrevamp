@@ -61,22 +61,23 @@ let testData = [
 
 export function ConfigureModules() {
     const [fields, setFields] = useState({
+        stepOrder: null,
         module: '',
         type: '',
         category: '',
-        name: '',
+        task: '',
         description: '',
-        // notes: '',
-        // status: '',
-        // instructionsLink: '',
-        // attachments: '',
-        // step: null,
-        // answer: '',
+        linkToDocs: '',
+        answer: '',
+        notes: '',
+        status: '',
     })
+
     const uniqueTypes = useRef([])
     const uniqueCategories = useRef([])
     const stepsList = useRef([])
-    
+    const [dbData, setDbData] = useState([])
+
     let options = [
         'Company Configuration',
         'Admin',
@@ -84,25 +85,58 @@ export function ConfigureModules() {
     ]
 
     function submitForm() {
-        console.log(fields)
+        // console.log(fields)
         testData.push(fields)
         options.push(fields.category)
         updateList(fields.module)
     }
 
-    useEffect(() => {
-        updateList('Company')
-    }, [])
+    // useEffect(() => {
+    //     // updateList(fields.module || 'Company')
+    // }, [])
+
+
+    async function getData(){
+        const request = await fetch(`http://localhost:5000/api/step`)
+        const data = await request.json()
+        return data
+    }
+
+    useEffect(()=>{
+        setDbData((prevData) => getData())    
+    }, [fields.module])
+
+    async function pushData(){
+        console.log({...fields})
+        const request = await fetch(`http://localhost:5000/api/step`,{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify(fields)
+        })
+        const data = await request.json()
+        console.log(data)
+    }
 
     async function updateList(module){
-        setFields({ ...fields, module: module })
-        stepsList.current = testData.filter(step => step.module === module)
+
+        // setFields({ ...fields, module: module })
+        await pushData()
+        await getData()
+
+        stepsList.current = await dbData.filter(step => step.module === module)
+
         uniqueTypes.current = Array.from(new Set(stepsList.current.map(step => step.type)))
+
         uniqueCategories.current = [...stepsList.current.reduce((step, {type, category}) => {
+
             return(step.set(`${type}-${category}`, { type, category }))
+
         }, new Map()).values()]
 
-        console.log(uniqueCategories)
+        // console.log(uniqueCategories)
     }
 
     return (
@@ -110,6 +144,14 @@ export function ConfigureModules() {
             <Card className="m-3">
                 <Card.Body>
                     <Form>
+                    <Form.Group className="mb-3">
+                            <Form.Label>Step Order</Form.Label>
+                            <Form.Control
+                                placeholder="1"
+                                aria-label="Step Order"
+                                onChange={(e) => setFields({ ...fields, stepOrder: e.target.value })}
+                            />
+                        </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Module</Form.Label>
                             <Form.Select
@@ -140,13 +182,28 @@ export function ConfigureModules() {
                             <Form.Control
                                 placeholder="Instruction name"
                                 aria-label="Instruction name"
-                                onChange={(e) => setFields({ ...fields, name: e.target.value })}
+                                onChange={(e) => setFields({ ...fields, task: e.target.value })}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Description</Form.Label>
                             <Form.Control as="textarea" rows={3} onChange={(e) => setFields({ ...fields, dsecription: e.target.value })} />
                         </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Link to Attachments</Form.Label>
+                            <Form.Control
+                                placeholder="https://www.website.com..."
+                                aria-label="Link to instructions"
+                                onChange={(e) => setFields({ ...fields, linkToDocs: e.target.value })}
+                            />
+                        </Form.Group>
+                        {/* <Form.Group className="mb-3">
+                            <Form.Label>Answer</Form.Label>
+                            <Form.Control
+                                aria-label="Link to instructions"
+                                onChange={(e) => setFields({ ...fields, answer: e.target.value })}
+                            />
+                        </Form.Group> */}
                     </Form>
                 </Card.Body>
 

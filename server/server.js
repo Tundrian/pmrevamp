@@ -2,10 +2,11 @@ const express = require('express')
 require('dotenv').config()
 const connectDB = require('./config/db')
 const StepRouter = require('./routes/stepRoutes')
-
+const cors = require('cors')
 
 connectDB()
 const app = express()
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 

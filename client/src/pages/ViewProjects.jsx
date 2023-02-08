@@ -1,6 +1,17 @@
 import Table from 'react-bootstrap/Table';
-
+import { useEffect } from 'react';
 export function ViewProjects() {
+
+    async function getData(){
+        const request = await fetch(`http://localhost:5000/api/step`)
+        const data = await request.json()
+        console.log('data: ', data)
+    }
+
+    useEffect(() => {
+        getData()
+    }, [])
+
     return (
         <>
             <h1>View Projects</h1>

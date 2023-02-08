@@ -22,7 +22,7 @@ const getStep = asyncHandler(async (req, res) => {
 // @access Private
 const getSteps = asyncHandler(async (req, res) => {
     const steps = await Step.find()
-
+    console.log('getSteps: ', steps)
     res.status(200).json(steps)
 })
 
@@ -30,6 +30,7 @@ const getSteps = asyncHandler(async (req, res) => {
 // @route POST /api/step
 // @access Private
 const setStep = asyncHandler(async (req, res) => {
+    console.log(req.body)
     if(!req.body.task){
         res.status(400)
         throw new Error('Please add a task field')

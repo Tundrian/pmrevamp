@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose
 
 const step = new Schema({
-    id: String,
+    // id: String,
     stepOrder: Number,
     module: String,
     type: String,
