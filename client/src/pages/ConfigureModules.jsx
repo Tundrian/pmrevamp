@@ -1,63 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { modules } from '../lists/modules'
 import { implementationTypes } from '../lists/implementationTypes'
 import { Card, Form, Button } from 'react-bootstrap'
 import { Typeahead } from 'react-bootstrap-typeahead'
-
-// let testData = [
-//     {
-//         id: '1',
-//         name: 'Grant Access',
-//         description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, nemo!',
-//         module: 'Company',
-//         type: 'Configuration',
-//         category: 'External Authorization',
-//         notes: '',
-//         answer: '',
-//         link: '',
-//         status: '',
-//         attachment: '',
-//     },
-//     {
-//         id: '2',
-//         name: 'Set up Admin Role',
-//         description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, nemo!',
-//         module: 'Company',
-//         type: 'Configuration',
-//         category: 'External Authorization',
-//         notes: '',
-//         answer: '',
-//         link: '',
-//         status: '',
-//         attachment: '',
-//     },
-//     {
-//         id: '3',
-//         name: 'Import COA',
-//         description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, nemo!',
-//         module: 'General Ledger',
-//         type: 'Import',
-//         category: 'Setup Import',
-//         notes: '',
-//         answer: '',
-//         link: '',
-//         status: '',
-//         attachment: '',
-//     },
-//     {
-//         id: '4',
-//         name: 'Setup entities',
-//         description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, nemo!',
-//         module: 'Company',
-//         type: 'Configuration',
-//         category: 'Entities',
-//         notes: '',
-//         answer: '',
-//         link: '',
-//         status: '',
-//         attachment: '',
-//     },
-// ]
 
 export function ConfigureModules() {
     const [fields, setFields] = useState({
@@ -86,21 +31,18 @@ export function ConfigureModules() {
     ]
 
     async function submitForm() {
-        console.log('submitForm')
         await pushData()
         await getData()
         await updateList(fields.module)
     }
 
     async function getData(){
-        console.log('getData')
         const request = await fetch(`http://localhost:5000/api/step`)
         const data = await request.json()
         setDbData(data)
     }
 
     async function pushData(){
-        console.log('pushData')
         const request = await fetch(`http://localhost:5000/api/step`,{
             method: 'POST',
             headers: {
@@ -109,15 +51,9 @@ export function ConfigureModules() {
               },
             body: JSON.stringify(fields)
         })
-        const data = await request.json()
-        console.log('data push: ', data)
     }
 
     async function updateList(module){
- 
-        console.log('updateList')
-        console.log("dbData: ", dbData)
-        console.log('module: ', module)
 
         setFields({...fields, module: module})
         
@@ -131,10 +67,6 @@ export function ConfigureModules() {
 
         }, new Map()).values()]
 
-        console.log('stepsList: ', stepsList.current)
-        console.log('uniqueTypes: ', uniqueTypes.current)
-        console.log('uniqueCategories: ', uniqueCategories.current)
-    
     }
 
     return (
