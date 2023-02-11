@@ -2,6 +2,10 @@ const asyncHandler = require('express-async-handler')
 
 const Project = require('../models/Step')
 
+const {
+    setProjectSteps,
+} = require('./projectStepController')
+
 // @desc Get step
 // @route GET /api/project/:id
 // @access Private
@@ -79,6 +83,20 @@ const deleteProject = asyncHandler(async(req,res)=>{
 // @route SET /api/project/new
 // @access Private
 const setNewProject = asyncHandler(async(req,res) => {
+    /*
+        - create new project
+            - header data
+            - project name
+            - modules
+        - get project id from creating new project
+        - get modules from request 
+            - get list for each module in request
+        - push list of projectSteps for each step
+    */
+    const id = await setProject(req)
+   //Add a function to stepController to get modules with a filter (by modules as a parameter)
+    //then call the controller to get a list of steps from each moduel
+    //then create projectSteps for each step returned and assign the project.id = id
 
 })
 
