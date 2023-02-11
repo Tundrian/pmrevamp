@@ -75,10 +75,18 @@ const deleteProject = asyncHandler(async(req,res)=>{
     res.status(200).json({id: req.params.id})
 })
 
+// @desc Create new project with module template
+// @route SET /api/project/new
+// @access Private
+const setNewProject = asyncHandler(async(req,res) => {
+
+})
+
 module.exports = {
     getProject,
     getProjects,
     setProject,
     updateProject,
     deleteProject,
+    setNewProject
 }
