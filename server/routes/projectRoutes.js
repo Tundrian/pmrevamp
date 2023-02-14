@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {
     getProject,
-    getProjects,
+    // getProjects,
     setProject,
     updateProject,
     deleteProject,
@@ -14,6 +14,6 @@ router.get('/:id', getProject)
 router.post('/', setProject)
 router.delete('/:id', deleteProject)
 router.put('/:id', updateProject)
-router.get('/new', setNewProject)
+router.post('/new', setNewProject)
 
 module.exports = router

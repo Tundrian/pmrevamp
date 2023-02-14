@@ -86,10 +86,20 @@ const deleteStep = asyncHandler(async (req,res) => {
     res.status(200).json({id: req.params.id})
 })
 
+// @desc Get steps by module
+// @route Get /api/step/module
+// @access Private
+const getStepsByModule = asyncHandler(async (req, res) => {
+    let modules = []
+    console.log('req.body: ', req.body)
+    // const step = await Step.find({module: {$in: [req.body.]}})
+})
+
 module.exports = {
     getStep,
     getSteps,
     setStep,
     updateStep,
-    deleteStep
+    deleteStep,
+    getStepsByModule,
 }

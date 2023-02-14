@@ -27,12 +27,15 @@ function createProject() {
   const [modulesChosen, setModulesChosen] = useState(() => [])
   const [cacheFormData, setCacheFormData] = useState(PROJECT_DATA)
 
+  console.log('cacheFormData: ', cacheFormData)
   //type: Partial<FormData>
   function updateFields(fields) {
     setCacheFormData(prev => {
-      console.log(fields, prev, fields)
+      // console.log(fields, prev, fields)
+      console.log('modulesChosen: ', )
       return { ...prev, ...fields }
     })
+
   }
 
   //add each form component as an element in the useMultiStepForm argument
@@ -46,13 +49,25 @@ function createProject() {
     isLastStep
   } = useMultiStepForm([<ModuleSelection {...cacheFormData} updateFields={updateFields} />])
 
-  function onSubmit(e) {
+  async function onSubmit(e) {
     e.preventDefault()
 
     if (!isLastStep) return next()
-
+    console.log('submit: ', cacheFormData.modulesChosen)
     //replace with fetch call and route to next page
-    alert("Successful Account Creation")
+    // alert("Successful Project Creation")
+    const data = await fetch('http://localhost:5000/api/project/new', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        modules: cacheFormData.modulesChosen
+      })
+    })
+    // const result = await data.json()
+    // console.log('result: ', result)
   }
 
   return (
@@ -67,7 +82,7 @@ function createProject() {
           {step}
           <div className="mt-[1rem] flex gap-[0.5rem] justify-end">
             {/* {isFirstStep !== 0 && <button type="button" onClick={back} className="border border-gray-400 rounded-lg px-3 py-1 shadow-md hover:bg-blue-600 hover:text-white mx-2">Back</button>} */}
-            <button type="submit" className="bg-blue-500 text-white border border-gray-400 rounded-lg px-3 py-1 shadow-md hover:bg-green-500 mx-2">
+            <button onClick={(e) => onSubmit(e)} type="submit" className="bg-blue-500 text-white border border-gray-400 rounded-lg px-3 py-1 shadow-md hover:bg-green-500 mx-2">
               {isLastStep ? "Submit" : "Next"}
             </button>
           </div>
