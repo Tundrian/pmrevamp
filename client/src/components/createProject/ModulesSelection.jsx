@@ -1,6 +1,6 @@
 import { FormWrapper } from "./FormWrapper"
 
-export function ModuleSelection({customer, modules, modulesChosen, updateFields}) {
+export function ModuleSelection({customer, projectName, modules, modulesChosen, updateFields}) {
 
     return <FormWrapper title="Customer & Modules">
         <div className="mb-4 flex">
@@ -8,6 +8,12 @@ export function ModuleSelection({customer, modules, modulesChosen, updateFields}
                 Customer
             </label>
             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Customer Name" value={customer} onChange={e => updateFields({customer: e.target.value})} />
+        </div>
+        <div className="mb-4 flex">
+            <label className="text-gray-700 text-xl mb-2 grid place-items-center px-3" htmlFor="customer">
+                Project Name
+            </label>
+            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Project Name" value={projectName} onChange={e => updateFields({projectName: e.target.value})} />
         </div>
         <div className="mb-4 flex relative">
             <label className="block text-gray-700 text-xl px-3 mb-2" htmlFor="username">

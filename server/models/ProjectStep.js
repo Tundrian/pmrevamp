@@ -13,6 +13,7 @@ const projectStep = new Schema({
     answer: String,
     notes: String,
     status: String,
+    originId: String,
 })
 
 module.exports = mongoose.model('ProjectStep', projectStep)

@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler')
 
 const Project = require('../models/Step')
 const Step = require('../models/Step')
+const ProjectStep = require('../models/ProjectStep')
 
 // @desc Get step
 // @route GET /api/project/:id
@@ -90,14 +91,45 @@ const setNewProject = asyncHandler(async(req,res) => {
             - get list for each module in request
         - push list of projectSteps for each step
     */
-    // const id = await setProject(req.body)
-    console.log('set new project: ', req.body.modules)
-    let steps = await Step.find({module: {$in: req.body.modules}}) 
-    console.log('steps: ', steps)
-    //Add a function to stepController to get modules with a filter (by modules as a parameter)
+        if(!req.body.name){
+            res.status(400)
+            throw new Error('Please add a name')
+        }
+    
+        const project = await Project.create({
+            name: req.body.name,
+            customer: req.body.customer
+        })
+        
+        
 
-    //then call the controller to get a list of steps from each moduel
-    //then create projectSteps for each step returned and assign the project.id = id
+    let steps = await Step.find({module: {$in: req.body.modules}}) 
+    let projectSteps = await steps.map(step => {
+        return {...step._doc, projectId: project.id}
+    })
+    projectSteps = projectSteps.map(projectStep => {
+        return {
+            projectId: projectStep.projectId,
+            stepOrder: projectStep.stepOrder,
+            module: projectStep.module,
+            type: projectStep.type,
+            category: projectStep.category,
+            task: projectStep.task,
+            description: projectStep.description,
+            linkToDocs: projectStep.linkToDocs,
+            answer: projectStep.answer,
+            notes: projectStep.notes,
+            status: 'Active',
+            originId: projectStep._id,
+        }
+    })
+    
+    // console.log(projectSteps)
+
+    const data = await ProjectStep.insertMany(projectSteps)
+    console.log(data)
+
+    res.status(200).json(data)
     
 })
 

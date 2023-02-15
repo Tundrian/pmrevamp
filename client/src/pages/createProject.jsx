@@ -18,6 +18,7 @@ const INITIAL_DATA = {
 
 const PROJECT_DATA = {
   customer: "",
+  projectName: "",
   modules: ['Company', 'General Ledger', 'Accounts Payable', 'Accounts Receivable'],
   modulesChosen: []
 }
@@ -27,12 +28,12 @@ function createProject() {
   const [modulesChosen, setModulesChosen] = useState(() => [])
   const [cacheFormData, setCacheFormData] = useState(PROJECT_DATA)
 
-  console.log('cacheFormData: ', cacheFormData)
+  // console.log('cacheFormData: ', cacheFormData)
   //type: Partial<FormData>
   function updateFields(fields) {
     setCacheFormData(prev => {
       // console.log(fields, prev, fields)
-      console.log('modulesChosen: ', )
+      // console.log('modulesChosen: ', )
       return { ...prev, ...fields }
     })
 
@@ -53,7 +54,7 @@ function createProject() {
     e.preventDefault()
 
     if (!isLastStep) return next()
-    console.log('submit: ', cacheFormData.modulesChosen)
+    // console.log('submit: ', cacheFormData.modulesChosen)
     //replace with fetch call and route to next page
     // alert("Successful Project Creation")
     const data = await fetch('http://localhost:5000/api/project/new', {
@@ -63,7 +64,9 @@ function createProject() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        modules: cacheFormData.modulesChosen
+        modules: cacheFormData.modulesChosen,
+        customer: cacheFormData.customer,
+        name: cacheFormData.projectName
       })
     })
     // const result = await data.json()
