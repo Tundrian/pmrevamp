@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler')
 
-const Project = require('../models/Step')
+const Project = require('../models/Project')
 const Step = require('../models/Step')
 const ProjectStep = require('../models/ProjectStep')
 
@@ -24,7 +24,7 @@ const getProject = asyncHandler(async(req, res) => {
 // @access Private
 const getProjects = asyncHandler(async(req, res) => {
     const projects = await Project.find()
-    
+    console.log(projects)
     res.status(200).json(projects)
 })
 
@@ -81,16 +81,6 @@ const deleteProject = asyncHandler(async(req,res)=>{
 // @route POST /api/project/new
 // @access Private
 const setNewProject = asyncHandler(async(req,res) => {
-    /*
-        - create new project
-            - header data
-            - project name
-            - modules
-        - get project id from creating new project
-        - get modules from request 
-            - get list for each module in request
-        - push list of projectSteps for each step
-    */
         if(!req.body.name){
             res.status(400)
             throw new Error('Please add a name')
@@ -101,8 +91,6 @@ const setNewProject = asyncHandler(async(req,res) => {
             customer: req.body.customer
         })
         
-        
-
     let steps = await Step.find({module: {$in: req.body.modules}}) 
     let projectSteps = await steps.map(step => {
         return {...step._doc, projectId: project.id}
@@ -123,14 +111,10 @@ const setNewProject = asyncHandler(async(req,res) => {
             originId: projectStep._id,
         }
     })
-    
-    // console.log(projectSteps)
 
     const data = await ProjectStep.insertMany(projectSteps)
-    console.log(data)
 
     res.status(200).json(data)
-    
 })
 
 module.exports = {

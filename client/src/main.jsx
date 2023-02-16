@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import CreateProject from './pages/createProject'
 import { ConfigureModules } from './pages/ConfigureModules'
 import { ViewProjects}  from './pages/ViewProjects'
+import { ProjectDetails } from './pages/ProjectDetails'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "viewProjects",
         element: <ViewProjects />,
+      },
+      {
+        path: "projectDetails",
+        element: <ProjectDetails />,
       },
     ]
   },

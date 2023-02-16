@@ -6,4 +6,4 @@ const project = new Schema({
     customer: String,
 })
 
-module.exports = mongoose.model('Project', step)
+module.exports = mongoose.model('Project', project)
