@@ -2,7 +2,6 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
-import {ProjectDetails} from './ProjectDetails'
 
 export function ViewProjects() {
 
@@ -12,7 +11,7 @@ export function ViewProjects() {
         const request = await fetch(`http://localhost:5000/api/project/all`)
         const data = await request.json()
         setProjects(() => data )
-        console.log('data: ', projects)
+        // console.log('data: ', projects)
     }
 
     return (
@@ -35,7 +34,7 @@ export function ViewProjects() {
                             <tr key={project._id}>
                                 <td>{i + 1}</td>
                                 <td>{project.customer}</td>
-                                <td><Link path={'/projectDetails'} element={<ProjectDetails projectId={project._id} />}>{project.name}</Link></td>
+                                <td><Link to={`/projectDetails/${project._id}`}>{project.name}</Link></td>
                             </tr>
                        
                         )

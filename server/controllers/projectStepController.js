@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler')
 
-const ProjectStep = require('../models/Step')
+const ProjectStep = require('../models/ProjectStep')
 
 // @desc Get step
 // @route GET /api/projectStep/:id
@@ -18,11 +18,12 @@ const getProjectStep = asyncHandler(async(req, res) => {
 })
 
 // @desc Get projectSteps
-// @route GET api/projectStep
+// @route GET api/projectStep/all/:projectId
 // @access Private
 const getProjectSteps = asyncHandler(async(req, res) => {
-    const projectSteps = await ProjectStep.find()
-    
+    const projectSteps = await ProjectStep.find({projectId: req.params.projectId.toString()}).exec()
+    console.log('params: ', typeof req.params.projectId)
+    console.log(projectSteps)
     res.status(200).json(projectSteps)
 })
 

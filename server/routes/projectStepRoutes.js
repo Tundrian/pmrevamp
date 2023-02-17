@@ -8,6 +8,7 @@ const {
     deleteProjectStep,
 } = require('../controllers/projectStepController')
 
+router.get('/all/:projectId', getProjectSteps)
 router.get('/', getProjectStep)
 router.get('/:id', getProjectStep)
 router.post('/', setProjectStep)
