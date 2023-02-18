@@ -22,8 +22,6 @@ const getProjectStep = asyncHandler(async(req, res) => {
 // @access Private
 const getProjectSteps = asyncHandler(async(req, res) => {
     const projectSteps = await ProjectStep.find({projectId: req.params.projectId.toString()}).exec()
-    console.log('params: ', typeof req.params.projectId)
-    console.log(projectSteps)
     res.status(200).json(projectSteps)
 })
 
