@@ -35,20 +35,20 @@ export function ProjectDetails() {
             {modules.length && modules.map((module, i) => {
                 return (
                     <Accordion key={module} defaultActiveKey="0" className="my-4">
-                        <Accordion.Item eventKey={i} key={module} >
-                            <Accordion.Header >Module: {module}</Accordion.Header>
+                        <Accordion.Item eventKey={i}>
+                            <Accordion.Header>Module: {module}</Accordion.Header>
                             {categories.length && categories.filter(category => category.module === module).map(category => {
                                 return (
                                     <Accordion.Body key={category.category}>
                                         <h2>Category: {category.category}</h2>
                                         {projectDetails.length && projectDetails.filter(step => step.module === module && step.category === category.category).map((step) => {
                                             return (
-                                                <>
-                                                    <ListGroup key={step._id}>
+                                                <div key={step._id}>
+                                                    <ListGroup>
                                                         <ListGroup.Item>{step.task}</ListGroup.Item>
                                                         <ListGroup.Item>{step.description}</ListGroup.Item>
                                                     </ListGroup>
-                                                </>
+                                                </div>
                                             )
                                         })}
                                     </Accordion.Body>
