@@ -93,7 +93,7 @@ export function ConfigureModules() {
                             </Form.Select>
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Implenetation Type</Form.Label>
+                            <Form.Label>Implemetation Type</Form.Label>
                             <Form.Select value={fields.type} onChange={(e) => setFields({ ...fields, type: e.target.value })}>
                                 {implementationTypes.map(implementationType => (<option key={implementationType}>{implementationType}</option>))}
                             </Form.Select>
@@ -118,7 +118,7 @@ export function ConfigureModules() {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Description</Form.Label>
-                            <Form.Control as="textarea" rows={3} onChange={(e) => setFields({ ...fields, dsecription: e.target.value })} />
+                            <Form.Control as="textarea" rows={3} onChange={(e) => setFields({ ...fields, description: e.target.value })} />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Link to Attachments</Form.Label>
@@ -126,6 +126,7 @@ export function ConfigureModules() {
                                 placeholder="https://www.website.com..."
                                 aria-label="Link to instructions"
                                 onChange={(e) => setFields({ ...fields, linkToDocs: e.target.value })}
+                                
                             />
                         </Form.Group>
                         {/* <Form.Group className="mb-3">
