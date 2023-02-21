@@ -43,7 +43,7 @@ export function ConfigureModules() {
     }
 
     async function pushData(){
-        const request = await fetch(`http://localhost:5000/api/step`,{
+        await fetch(`http://localhost:5000/api/step`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -70,8 +70,8 @@ export function ConfigureModules() {
     }
 
     return (
-        <>
-            <Button onClick={() => getData()}>Get Data</Button>
+        <div className="m-4">
+            <Button  onClick={() => getData()}>Get Data</Button>
             <Card className="m-3">
                 <Card.Body>
                     <Form>
@@ -129,13 +129,6 @@ export function ConfigureModules() {
                                 
                             />
                         </Form.Group>
-                        {/* <Form.Group className="mb-3">
-                            <Form.Label>Answer</Form.Label>
-                            <Form.Control
-                                aria-label="Link to instructions"
-                                onChange={(e) => setFields({ ...fields, answer: e.target.value })}
-                            />
-                        </Form.Group> */}
                     </Form>
                 </Card.Body>
 
@@ -169,6 +162,6 @@ export function ConfigureModules() {
                     ))}
                 </Card.Body>
             </Card>
-        </>
+        </div>
     )
 }

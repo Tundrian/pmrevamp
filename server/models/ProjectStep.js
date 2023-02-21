@@ -17,3 +17,10 @@ const projectStep = new Schema({
 })
 
 module.exports = mongoose.model('ProjectStep', projectStep)
+
+/* order by step order */
+// task
+// description
+//link to docs
+// notes
+// status (as a checkbox or button of some kind

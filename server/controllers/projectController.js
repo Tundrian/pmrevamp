@@ -39,7 +39,14 @@ const setProject = asyncHandler(async(req, res) => {
 
     const project = await Project.create({
         name: req.body.name,
-        customer: req.body.customer
+        customer: req.body.customer,
+        csmMane: req.body.csmName,
+        csmEmail: req.body.csmEmail,
+        clientId: req.body.clientId,
+        sowAttachment: req.body.sowAttachment,
+        goLiveDate: req.body.goLivedate,
+        status: req.body.status,
+        startDate: req.body.startDate,
     })
 
     res.status(200).json(project)
@@ -88,7 +95,14 @@ const setNewProject = asyncHandler(async(req,res) => {
     
         const project = await Project.create({
             name: req.body.name,
-            customer: req.body.customer
+            customer: req.body.customer,
+            csmMane: req.body.csmName,
+            csmEmail: req.body.csmEmail,
+            clientId: req.body.clientId,
+            sowAttachment: req.body.sowAttachment,
+            goLiveDate: req.body.goLivedate,
+            status: req.body.status,
+            startDate: req.body.startDate,
         })
         
     let steps = await Step.find({module: {$in: req.body.modules}}) 

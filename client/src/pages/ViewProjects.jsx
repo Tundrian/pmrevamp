@@ -16,7 +16,7 @@ export function ViewProjects() {
 
     return (
         
-        <>
+        <div className="m-4">
             <Button onClick={() => getData()}>Get Projects</Button>
             <h1>View Projects</h1>
             <Table striped bordered hover>
@@ -41,6 +41,6 @@ export function ViewProjects() {
                     })}
                 </tbody>
             </Table>
-        </>
+        </div>
     )
 }
