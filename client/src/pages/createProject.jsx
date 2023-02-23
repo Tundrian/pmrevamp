@@ -28,12 +28,8 @@ function createProject() {
   const [modulesChosen, setModulesChosen] = useState(() => [])
   const [cacheFormData, setCacheFormData] = useState(PROJECT_DATA)
 
-  // console.log('cacheFormData: ', cacheFormData)
-  //type: Partial<FormData>
   function updateFields(fields) {
     setCacheFormData(prev => {
-      // console.log(fields, prev, fields)
-      // console.log('modulesChosen: ', )
       return { ...prev, ...fields }
     })
 
@@ -54,9 +50,6 @@ function createProject() {
     e.preventDefault()
 
     if (!isLastStep) return next()
-    // console.log('submit: ', cacheFormData.modulesChosen)
-    //replace with fetch call and route to next page
-    // alert("Successful Project Creation")
     const data = await fetch('http://localhost:5000/api/project/new', {
       method: 'POST',
       headers: {
@@ -69,14 +62,12 @@ function createProject() {
         name: cacheFormData.projectName
       })
     })
-    // const result = await data.json()
-    // console.log('result: ', result)
   }
 
   return (
 
-    <div className="grid place-items-center m-3">
-      <div className="border border-gray-300 text-center rounded">
+    <div className="grid place-items-center min-h-screen">
+      <div className="border border-gray-300 text-center rounded w-11/12 mx-auto">
         <h1 className="pt-3 text-4xl text-center">Create Project</h1>
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8">
           {/* <div className="mb-4 flex">

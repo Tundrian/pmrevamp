@@ -3,13 +3,15 @@ import '../index.css'
 import '../App.css'
 import { InputGroup, Form, Button, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import {useState} from 'react'
+import dummylogo from '../../public/images/dummy-logo.png'
 
 export default function Root() {
   const [darkMode, setDarkMode] = useState(true);
 
   return (
     <>
-      <Navbar expand="lg" bg="light"  >
+      <div className="fixed top-0 left-0 right-0 z-10 bg-white border-2 border-lime-500">
+      <Navbar expand="lg" bg="light" className="" >
         <Container>
           <Navbar.Brand ><Link to="/" className="no-underline">PM Revamp</Link></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" className=""/>
@@ -49,8 +51,22 @@ export default function Root() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      </div>
+      <div className="mb-12"></div>
       <Outlet />
       <div id="detail"></div>
+      <footer className="bg-green-900 min-h-[200px]  p-4">
+        <div className="grid grid-cols-3 gap-4">
+        <div className="flex flex-col text-white">
+          <img src={dummylogo} className="mb-2"/>
+          <p className="leading-none">123 street</p>
+          <p className="leading-none">Place, ON</p>
+          <p className="leading-none">N1N 1N1</p>
+        </div>
+        </div>
+        
+       <p className="text-gray-400 text-center mb-1">&copy; Copyright 2023</p>
+      </footer>
     </>
   );
 }

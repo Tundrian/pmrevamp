@@ -16,9 +16,12 @@ export function ViewProjects() {
 
     return (
         
-        <div className="m-4">
-            <Button onClick={() => getData()}>Get Projects</Button>
-            <h1>View Projects</h1>
+        <div className="p-4 min-h-screen bg-slate-100">
+            <div className="flex mb-3 bg-slate-800 px-3 py-2 rounded drop-shadow-md">
+                <h1 className="drop-shadow-lg text-gray-200">View Projects</h1>
+                <Button className="ml-auto h-fit my-auto" onClick={() => getData()}>Get Projects</Button>
+            </div>
+            
             <Table striped bordered hover>
                 <thead>
                     <tr>

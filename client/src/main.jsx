@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-// import App from './App'
+import App from './App'
 import Root from './pages/Root'
 import ErrorPage from './pages/error-page'
 import './index.css'
@@ -21,6 +21,10 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "/",
+        element: <App />
+      },
       {
         path: "createProject",
         element: <CreateProject />,
