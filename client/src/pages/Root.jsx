@@ -10,7 +10,7 @@ export default function Root() {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-10 bg-white border-2 border-lime-500">
+      <div className="fixed top-0 left-0 right-0 z-10 bg-white">
       <Navbar expand="lg" bg="light" className="" >
         <Container>
           <Navbar.Brand ><Link to="/" className="no-underline">PM Revamp</Link></Navbar.Brand>
@@ -55,7 +55,7 @@ export default function Root() {
       <div className="mb-12"></div>
       <Outlet />
       <div id="detail"></div>
-      <footer className="bg-green-900 min-h-[200px]  p-4">
+      <footer className="bg-slate-900 min-h-[200px]  p-4">
         <div className="grid grid-cols-3 gap-4">
         <div className="flex flex-col text-white">
           <img src={dummylogo} className="mb-2"/>
