@@ -3,7 +3,7 @@ import '../index.css'
 import '../App.css'
 import { InputGroup, Form, Button, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import {useState} from 'react'
-import dummylogo from '../../public/images/dummy-logo.png'
+import dummylogo from '/images/dummy-logo.png'
 
 export default function Root() {
   const [darkMode, setDarkMode] = useState(true);

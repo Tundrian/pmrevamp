@@ -1,4 +1,5 @@
 import { FormWrapper } from "./FormWrapper"
+import {AiOutlineCloseSquare} from 'react-icons/ai'
 
 export function ModuleSelection({customer, projectName, modules, modulesChosen, updateFields, csmName, csmEmail, }) {
 
@@ -33,7 +34,9 @@ export function ModuleSelection({customer, projectName, modules, modulesChosen, 
             </label>
             <select name="" id="" className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-start">
                 {modules.length ? modules.map((module, i) =>
-                    <option key={module} onClick={() => updateFields({modulesChosen: [...modulesChosen, module]})} value={module}>{module}</option>
+                    <option key={module} onClick={() => {
+                        return modulesChosen.some(x => x === module) ? updateFields({modulesChosen: [...modulesChosen]}) :  updateFields({modulesChosen: [...modulesChosen, module]})
+                    }} value={module}>{module}</option>
                 ) : ''}
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -44,7 +47,10 @@ export function ModuleSelection({customer, projectName, modules, modulesChosen, 
             <section className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3">
                 <ul className="w-full flex flex-col items-start pt-3">
                     {modulesChosen.length ? modulesChosen.map((module, i) =>
-                        <li key={i} className="mb-2 border-b w-full">{i+1}. {module}</li>
+                        <li key={i} className="mb-2 border-b w-full flex justify-between py-2 leading-8">
+                            <span>{i+1}. {module}</span>
+                            <AiOutlineCloseSquare className="text-red-500 text-2xl hover:cursor-pointer hover:text-3xl" onClick={() => updateFields({modulesChosen: [...modulesChosen.filter(x => x !== module)]})} />
+                        </li>
                     ) : ''}
                 </ul>
             </section>

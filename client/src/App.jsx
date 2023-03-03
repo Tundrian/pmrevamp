@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './index.css'
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import homepageBanner from '../public/images/homepage-banner.jpg'
+import homepageBanner from '/images/homepage-banner.jpg'
 function App() {
   const [count, setCount] = useState(0)
 
