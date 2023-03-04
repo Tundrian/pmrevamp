@@ -11,6 +11,7 @@ const project = new Schema({
     goLiveDate: Date,
     status: String,
     startDate: Date,
+    authExpiry: Date,
 })
 
 module.exports = mongoose.model('Project', project)

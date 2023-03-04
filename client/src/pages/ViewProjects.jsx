@@ -1,33 +1,36 @@
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
 export function ViewProjects() {
 
     const [projects, setProjects] = useState([])
 
-    async function getData(){
-        const request = await fetch(`http://localhost:5000/api/project/all`)
-        const data = await request.json()
-        setProjects(() => data )
-        // console.log('data: ', projects)
-    }
+    useEffect(() => {
+        const fetchData = async () => {
+            const request = await fetch(`http://localhost:5000/api/project/all`)
+            const data = await request.json()
+            setProjects(() => data )
+        }
+        fetchData().catch(console.error)
+    }, [])
+
 
     return (
         
         <div className="p-4 min-h-screen bg-slate-100">
-            <div className="flex mb-3 bg-slate-800 px-3 py-2 rounded drop-shadow-md">
+            <div className="mb-3 bg-slate-800 px-3 py-2 rounded drop-shadow-md">
                 <h1 className="drop-shadow-lg text-gray-200">View Projects</h1>
-                <Button className="ml-auto h-fit my-auto" onClick={() => getData()}>Get Projects</Button>
             </div>
             
-            <Table striped bordered hover>
+            <Table striped bordered hover className="">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Customer</th>
                         <th>Project Name</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,6 +41,7 @@ export function ViewProjects() {
                                 <td>{i + 1}</td>
                                 <td>{project.customer}</td>
                                 <td><Link to={`/projectDetails/${project._id}`}>{project.name}</Link></td>
+                                <td>{project.status}</td>
                             </tr>
                        
                         )

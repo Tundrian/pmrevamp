@@ -59,8 +59,11 @@ export function ProjectDetails() {
                                                             return (
                                                                 <Card key={step._id} className="my-3 ml-5">
                                                                     <Card.Body>
+                                                                        
                                                                         <div className="flex flex-row justify-between">
+                                                                        
                                                                             <Card.Title className="nowrap w-auto">{step.task}</Card.Title>
+                                                                        
                                                                             <Form.Select aria-label="Status select" className="w-auto ml-10">
                                                                                 <option  value={step.status}>{step.status}</option>
                                                                                 <option value="Active">Active</option>
@@ -68,8 +71,11 @@ export function ProjectDetails() {
                                                                                 <option value="Complete">Complete</option>
                                                                                 <option value="Waiting on client">Waiting on client</option>
                                                                             </Form.Select>
+                                                                        
                                                                         </div>
+                                                                        
                                                                         <Card.Text>{step.description}</Card.Text>
+                                                                        <Card.Text>{step.notes}</Card.Text>
                                                                         <Card.Link href={step.linkToDocs}>
                                                                             <Button variant="primary" size="md">
                                                                                 <ImAttachment />

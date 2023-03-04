@@ -1,38 +1,94 @@
 import { FormWrapper } from "./FormWrapper"
 import {AiOutlineCloseSquare} from 'react-icons/ai'
-
-export function ModuleSelection({customer, projectName, modules, modulesChosen, updateFields, csmName, csmEmail, }) {
-
+import Form from 'react-bootstrap/Form'
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+export function ModuleSelection(
+    {
+        customer, 
+        projectName, 
+        modules, 
+        modulesChosen, 
+        updateFields, 
+        csmName, 
+        csmEmail, 
+        clientId,
+        sowAttachment,
+        goLiveDate,
+        status,
+        startDate,
+        authExpiry,
+    }) {
+        const [dateStartDate, setDateStartDate] = useState(new Date());
+    
     return <FormWrapper title="Customer & Modules">
+         
         <div className="mb-4 flex">
             <label className="text-gray-700 text-xl mb-2 px-3 w-64 text-start" htmlFor="customer">
                 Customer
             </label>
-            <input className="drop-shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Customer Name" value={customer} onChange={e => updateFields({customer: e.target.value})} />
+            <input className="drop-shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="customer" type="text" placeholder="The Company" value={customer} onChange={e => updateFields({customer: e.target.value})} />
         </div>
         <div className="mb-4 flex">
-            <label className="text-gray-700 text-xl mb-2 px-3 w-64 text-start" htmlFor="customer">
+            <label className="text-gray-700 text-xl mb-2 px-3 w-64 text-start" htmlFor="projectName">
                 Project Name
             </label>
-            <input className="drop-shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  id="username" type="text" placeholder="Project Name" value={projectName} onChange={e => updateFields({projectName: e.target.value})} />
+            <input className="drop-shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  id="projectName" type="text" placeholder="Implementation 0001" value={projectName} onChange={e => updateFields({projectName: e.target.value})} />
         </div>
         <div className="mb-4 flex">
-            <label className="text-gray-700 text-xl mb-2 px-3 w-64 text-start" htmlFor="customer">
+            <label className="text-gray-700 text-xl mb-2 px-3 w-64 text-start" htmlFor="csmName">
                 CSM Name
             </label>
-            <input className="drop-shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  id="username" type="text" placeholder="Project Name" value={projectName} onChange={e => updateFields({projectName: e.target.value})} />
+            <input className="drop-shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  id="csmName" type="text" placeholder="Jane Smith" value={csmName} onChange={e => updateFields({csmName: e.target.value})} />
         </div>
         <div className="mb-4 flex">
-            <label className="text-gray-700 text-xl mb-2 px-3 w-64 text-start" htmlFor="customer">
-                Project Name
+            <label className="text-gray-700 text-xl mb-2 px-3 w-64 text-start" htmlFor="csmEmail">
+                CSM Email
             </label>
-            <input className="drop-shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  id="username" type="text" placeholder="Project Name" value={projectName} onChange={e => updateFields({projectName: e.target.value})} />
+            <input className="drop-shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  id="csmEmail" type="text" placeholder="something@somethingelse.com" value={csmEmail} onChange={e => updateFields({csmEmail: e.target.value})} />
+        </div>
+        <div className="mb-4 flex">
+            <label className="text-gray-700 text-xl mb-2 px-3 w-64 text-start" htmlFor="clientId">
+                Client ID
+            </label>
+            <input className="drop-shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  id="clientId" type="text" placeholder="clientid" value={clientId} onChange={e => updateFields({clientId: e.target.value})} />
+        </div>
+        <div className="mb-4 flex">
+            <label className="text-gray-700 text-xl mb-2 px-3 w-64 text-start" htmlFor="sowAttachment">
+                SOW
+            </label>
+                <Form.Control type="file" className="drop-shadow-md appearance-none rounded w-full  text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+        <div className="mb-4 flex">
+            <label className="text-gray-700 text-xl mb-2 px-3 w-64 text-start" htmlFor="goLiveDate">
+                Go-live Date
+            </label>
+            <DatePicker selected={goLiveDate} onChange={date => updateFields({goLiveDate: date})}  value={goLiveDate} className="drop-shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+        <div className="mb-4 flex">
+            <label className="text-gray-700 text-xl mb-2 px-3 w-64 text-start" htmlFor="status">
+                Status
+            </label>
+            <input className="drop-shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  id="status" type="text" placeholder="status" value={status} onChange={e => updateFields({status: e.target.value})} />
+        </div>
+        <div className="mb-4 flex">
+            <label className="text-gray-700 text-xl mb-2 px-3 w-64 text-start" htmlFor="startDate">
+                Start Date
+            </label>
+            <DatePicker selected={startDate} onChange={date => updateFields({startDate: date})}  value={startDate} className="drop-shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+        <div className="mb-4 flex">
+            <label className="text-gray-700 text-xl mb-2 px-3 w-64 text-start" htmlFor="authExpiry">
+                Authorization Expiry Date
+            </label>
+            <DatePicker selected={authExpiry} onChange={date => updateFields({authExpiry: date})}  value={authExpiry} className="drop-shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
         <div className="mb-4 flex relative">
-            <label className="text-gray-700 text-xl mb-2 px-3 w-64 text-start" htmlFor="username">
+            <label className="text-gray-700 text-xl mb-2 px-3 w-64 text-start" htmlFor="modules">
                 Modules
             </label>
-            <select name="" id="" className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-start">
+            <select name="modules" id="modules" className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-start">
                 {modules.length ? modules.map((module, i) =>
                     <option key={module} onClick={() => {
                         return modulesChosen.some(x => x === module) ? updateFields({modulesChosen: [...modulesChosen]}) :  updateFields({modulesChosen: [...modulesChosen, module]})

@@ -1,38 +1,55 @@
 import { useState } from 'react'
 import { useMultiStepForm } from '../hooks/useMultiStepForm'
 import { ModuleSelection } from '../components/createProject/ModulesSelection'
+import { useNavigate } from "react-router-dom";
+
 //type FormData = {
 // everything as a string 
 //}
-const INITIAL_DATA = {
-  firstName: "",
-  lastName: "",
-  age: "",
-  street: "",
-  city: "",
-  state: "",
-  zip: "",
-  email: "",
-  password: "",
-}
+// const INITIAL_DATA = {
+//   firstName: "",
+//   lastName: "",
+//   age: "",
+//   street: "",
+//   city: "",
+//   state: "",
+//   zip: "",
+//   email: "",
+//   password: "",
+// }
 
-const PROJECT_DATA = {
-  customer: "",
-  projectName: "",
-  modules: ['Company', 'General Ledger', 'Accounts Payable', 'Accounts Receivable'],
-  modulesChosen: []
-}
+// const PROJECT_DATA = {
+//   customer: "",
+//   projectName: "",
+//   modules: ['Company', 'General Ledger', 'Accounts Payable', 'Accounts Receivable'],
+//   modulesChosen: [],
+//   csmName: "",
+//   csmEmail: "",
+// }
 
 function createProject() {
 
   const [modulesChosen, setModulesChosen] = useState(() => [])
-  const [cacheFormData, setCacheFormData] = useState(PROJECT_DATA)
-
+  const [cacheFormData, setCacheFormData] = useState({
+    customer: "",
+    projectName: "",
+    modules: ['Company', 'General Ledger', 'Accounts Payable', 'Accounts Receivable'],
+    modulesChosen: [],
+    csmName: "",
+    csmEmail: "",
+    clientId: "",
+    sowAttachment: "",
+    status: "Active",
+    startDate: "",
+    authExpiry: "",
+    goLiveDate: ""
+  })
+  const navigate = useNavigate()
+  
   function updateFields(fields) {
     setCacheFormData(prev => {
       return { ...prev, ...fields }
     })
-
   }
 
   //add each form component as an element in the useMultiStepForm argument
@@ -59,10 +76,22 @@ function createProject() {
       body: JSON.stringify({
         modules: cacheFormData.modulesChosen,
         customer: cacheFormData.customer,
-        name: cacheFormData.projectName
+        name: cacheFormData.projectName,
+        csmName: cacheFormData.csmName,
+        csmEmail: cacheFormData.csmEmail,
+        clientId: cacheFormData.clientId,
+        sowAttachment: cacheFormData.sowAttachment,
+        goLiveDate: cacheFormData.goLivedate,
+        status: 'Active',
+        startDate: cacheFormData.startDate,
+        authExpiry: cacheFormData.authExpiry,
       })
     })
+    console.log('posted')
+    return navigate(`/viewProjects`)
   }
+
+
 
   return (
 
