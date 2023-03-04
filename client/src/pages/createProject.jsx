@@ -3,30 +3,6 @@ import { useMultiStepForm } from '../hooks/useMultiStepForm'
 import { ModuleSelection } from '../components/createProject/ModulesSelection'
 import { useNavigate } from "react-router-dom";
 
-//type FormData = {
-// everything as a string 
-//}
-// const INITIAL_DATA = {
-//   firstName: "",
-//   lastName: "",
-//   age: "",
-//   street: "",
-//   city: "",
-//   state: "",
-//   zip: "",
-//   email: "",
-//   password: "",
-// }
-
-// const PROJECT_DATA = {
-//   customer: "",
-//   projectName: "",
-//   modules: ['Company', 'General Ledger', 'Accounts Payable', 'Accounts Receivable'],
-//   modulesChosen: [],
-//   csmName: "",
-//   csmEmail: "",
-// }
-
 function createProject() {
 
   const [modulesChosen, setModulesChosen] = useState(() => [])
@@ -81,7 +57,7 @@ function createProject() {
         csmEmail: cacheFormData.csmEmail,
         clientId: cacheFormData.clientId,
         sowAttachment: cacheFormData.sowAttachment,
-        goLiveDate: cacheFormData.goLivedate,
+        goLiveDate: cacheFormData.goLiveDate,
         status: 'Active',
         startDate: cacheFormData.startDate,
         authExpiry: cacheFormData.authExpiry,

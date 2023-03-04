@@ -16,7 +16,7 @@ const getProject = asyncHandler(async(req, res) => {
         throw new Error('Project not found')
     }
 
-    res.status(200).json(step)
+    res.status(200).json(project)
 })
 
 // @desc Get projects
@@ -111,6 +111,7 @@ const setNewProject = asyncHandler(async(req,res) => {
     let projectSteps = await steps.map(step => {
         return {...step._doc, projectId: project.id}
     })
+    
     projectSteps = projectSteps.map(projectStep => {
         return {
             projectId: projectStep.projectId,

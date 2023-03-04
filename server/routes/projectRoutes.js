@@ -10,8 +10,10 @@ const {
 } = require('../controllers/projectController')
 
 router.get('/all', getProjects)
-router.get('/', getProject)
 router.get('/:id', getProject)
+
+router.get('/', getProject)
+
 router.post('/', setProject)
 router.delete('/:id', deleteProject)
 router.put('/:id', updateProject)
